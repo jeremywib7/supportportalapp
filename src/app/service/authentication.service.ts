@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http"
 import {Observable} from "rxjs";
 import {User} from "../model/user";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {Message} from "primeng/api";
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,13 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
   }
 
-  public login(user: User): Observable<HttpResponse<any> | HttpErrorResponse> {
-    return this.http.post<HttpResponse<any> | HttpErrorResponse>(
+  public login(user: User): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>(
       `${this.host}/user/login`, user, {observe: 'response'});
   }
 
-  public register(user: User): Observable<any> | HttpErrorResponse {
-    return this.http.post<User | HttpErrorResponse>(
+  public register(user: User): Observable<any> {
+    return this.http.post<User>(
       `${this.host}/user/register`, user);
   }
 
@@ -55,7 +56,7 @@ export class AuthenticationService {
       this.logOut();
       return false;
     }
-    if (this.jwtHelper.decodeToken(this.token).sub != null || '') { // check token if return null after decoded
+    if (this.jwtHelper.decodeToken(this.token)?.sub != null || '') { // check token if return null after decoded
       return false;
     }
     if (!this.jwtHelper.isTokenExpired(this.token)) { // check if token not expired

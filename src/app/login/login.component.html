@@ -1,0 +1,48 @@
+<div class="flex align-items-center min-h-screen justify-content-center"
+     style="background:linear-gradient(-225deg,#ac32e4,#7918f2 48%,#4801ff)">
+  <div class="p-6 shadow-2 text-center lg:w-30rem"
+       style="border-radius: 12px;background-color: rgba(255,255,255,.1);color: rgba(255,255,255,.8)">
+    <div class="text-4xl font-medium mb-6">User Management Portal</div>
+    <form [formGroup]="loginForm">
+      <div class="col-12">
+        <input type="text" formControlName="userName" pInputText
+               class="field col-12 appearance-none p-3 mb-2 w-full outline-none text-xl block bg-white-alpha-10 text-white-alpha-60"
+               style="border-radius: 30px">
+        <div *ngIf="loginForm.controls['userName'].errors && (loginForm.controls['userName'].touched ||
+                                       loginForm.controls['userName'].dirty)">
+          <div *ngIf="loginForm.hasError('required','userName')">
+            <label>Username is required.</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <input type="password" formControlName="userPassword" pInputText
+               class="appearance-none p-3 w-full outline-none text-xl mb-2 bg-white-alpha-10 text-white-alpha-60"
+               style="border-radius: 30px">
+        <div *ngIf="loginForm.controls['userPassword'].errors && (loginForm.controls['userPassword'].touched ||
+                                       loginForm.controls['userPassword'].dirty)">
+          <div *ngIf="loginForm.hasError('required','userPassword')">
+            <label>Password is required.</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <p-messages [(value)]="authMessage" [enableService]="false"></p-messages>
+      </div>
+
+      <div class="col-12">
+        <button type="button" pButton label="Sign In" [loading]="isLoadingSignIn" (click)="onLogin(user)"
+                class="appearance-none border-none p-3 w-full outline-none text-xl mb-4 font-medium w-10rem bg-white-alpha-30
+            hover:bg-white-alpha-40 active:bg-white-alpha-20 text-white-alpha-80 cursor-pointer transition-colors
+             transition-duration-150"
+                style="border-radius: 30px">
+        </button>
+      </div>
+
+      <a class="cursor-pointer font-medium block text-center">Forgot Password?</a>
+    </form>
+  </div>
+</div>
+

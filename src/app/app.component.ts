@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Message} from "primeng/api";
+import {AuthenticationService} from "./service/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'supportportalapp';
+
+  constructor() {
+  }
+
 }
